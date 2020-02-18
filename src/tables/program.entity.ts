@@ -1,11 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinTable } from 'typeorm';
-import User from './users.entity';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, JoinTable, OneToMany } from 'typeorm';
+import User from './user.entity';
+import AssignedPrograms from './assigned_program.entity';
 
 
 @Entity()
 class Program {
     @PrimaryGeneratedColumn()
-    public id: string;
+    public id: number;
 
     @Column()
     public name: string;
@@ -13,8 +14,11 @@ class Program {
     @Column()
     public duration: number; 
 
-    @ManyToOne(() => User, (coach: User) => coach.program)
+    @ManyToOne(() => User, (coach: User) => coach.programs)
     public coach_: User;
+
+    @OneToMany(() => AssignedPrograms,(aProgram:AssignedPrograms)=>aProgram.program_)
+    public assignedPrograms: AssignedPrograms[];
 }
 
 export default Program;

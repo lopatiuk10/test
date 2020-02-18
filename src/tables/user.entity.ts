@@ -1,6 +1,8 @@
 import { Column, Entity,ManyToMany,JoinTable, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import Program from "./program.entity";
-import Role from "./roles.entity";
+import UserRole from "./user_role.entity";
+import AssignedProgram from "./assigned_program.entity";
+
  
 @Entity()
 class User {
@@ -17,16 +19,14 @@ class User {
   public password :string;
 
 
-  @OneToMany(() => Program, (program: Program) => program.id)
-  public program: Program[];
-
-  @ManyToMany(()=>Program)
-  @JoinTable()
+  @OneToMany(() => Program, (program: Program) => program.coach_)
   public programs: Program[];
 
-  @ManyToMany(() => Role)
-  @JoinTable()
-  public role_id: Role;
+  @OneToMany(() => AssignedProgram, (program: AssignedProgram) => program.athlete_)
+  public assignedPrograms: AssignedProgram[];
+
+  @OneToMany(() => UserRole,(role:UserRole)=>role.user_)
+  public role_id: UserRole[];
 }
  
 export default User;
