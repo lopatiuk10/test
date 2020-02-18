@@ -7,12 +7,12 @@ class App {
   public app: express.Application;
   public port: number;
  
-  constructor(controllers, port) {
+  constructor(port) {
     this.app = express();
     this.port = port;
  
     this.initializeMiddlewares();
-    this.initializeControllers(controllers);
+    //this.initializeControllers(controllers);
   }
  
   private initializeMiddlewares() {

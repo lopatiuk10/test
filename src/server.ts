@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 import App from './app';
 import config from './ormconfig';
-import PostController from './tables/users.controller';
+//import PostController from './tables/users.controller';
 //import validateEnv from './utils/validateEnv';
  
 //validateEnv();
@@ -16,9 +16,7 @@ import PostController from './tables/users.controller';
     return error;
   }
   const app = new App(
-    [
-      new PostController(),
-    ],5000
+    5000
   );
   app.listen();
 })();
